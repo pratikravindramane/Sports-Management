@@ -35,7 +35,7 @@ const ViewTeamPage = () => {
   }
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5" >
       <h1>View Team</h1>
       <div className="card">
         <div className="card-body">

@@ -22,7 +22,26 @@ const ViewEventPage = () => {
       } catch (error) {}
     };
     fetch();
-  }, []);
+  });
+  const token = localStorage.getItem("token");
+  const deleteHandler = async (id) => {
+    try {
+      const { data } = await axios.delete(
+        `${backendLocation}/admin/delete/event/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (data?.message) {
+        setServerError(data?.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const RegisterHandler = async (id) => {
     const token = localStorage.getItem("token");
     const decode = jwtDecode(token);
@@ -75,6 +94,7 @@ const ViewEventPage = () => {
               <th>Venue</th>
               <th>Participants</th>
               {(role === "student" || role === "teacher") && <th>Action</th>}
+              {role === "admin" && <th>Action</th>}
             </tr>
           </thead>
           <tbody>
@@ -87,7 +107,10 @@ const ViewEventPage = () => {
                 <td>{event.numberOfParticipants}</td>
                 {role === "student" && (
                   <td>
-                    <button onClick={() => RegisterHandler(event._id)}>
+                    <button
+                      onClick={() => RegisterHandler(event._id)}
+                      className="btn btn-primary"
+                    >
                       Register
                     </button>
                   </td>
@@ -96,12 +119,23 @@ const ViewEventPage = () => {
                 {role === "teacher" && (
                   <td>
                     <button
+                      className="btn  btn-primary"
                       onClick={(e) => {
                         e.preventDefault();
                         navigate(`/event/${event._id}`);
                       }}
                     >
                       Update
+                    </button>
+                  </td>
+                )}
+                {role === "admin" && (
+                  <td>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => deleteHandler(event._id)}
+                    >
+                      Delete
                     </button>
                   </td>
                 )}

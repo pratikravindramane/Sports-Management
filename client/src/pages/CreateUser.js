@@ -20,8 +20,17 @@ const CreateUserPage = () => {
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     email: Yup.string().email("Invalid email").required("Email is required"),
-    phone: Yup.string().required("Phone is required").min(10).max(10),
-    password: Yup.string().required("Password is required"),
+    phone: Yup.string()
+      .required("Phone number is required")
+      .matches(/^[0-9]+$/, "Phone number must contain only digits")
+      .min(10, "Phone number must be at least 10 characters")
+      .max(10, "Phone number must not exceed 10 characters"),
+    password: Yup.string()
+      .required("Password is required")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+        "Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, one number, and one special character."
+      ),
     role: Yup.string()
       .oneOf(["student", "teacher"])
       .required("Role is required"),
@@ -33,7 +42,7 @@ const CreateUserPage = () => {
     try {
       const newEmployee = await axios.post(
         `${backendLocation}/admin/create-user`,
-        { ...values},
+        { ...values },
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import LoginForm from "./components/LoginForm";
-import TeacherDashboard from "./components/TeacherDashboard";
-import StudentDashboard from "./components/StudentDashboard";
 import EventList from "./components/EventList";
 import NotFound from "./components/NotFound";
 import AboutUsPage from "./pages/AboutUs";
@@ -31,47 +29,26 @@ const App = () => {
       <Routes>
         {/* Public Routes */}
         <Route exact path="/" element={<HomePage />} />
-        {/* <Route exact path="/" element={<LoginForm />} /> */}
         <Route exact path="/login" element={<LoginForm />} />
         <Route exact path="/signup" element={<SignupPage />} />
         <Route exact path="/aboutus" element={<AboutUsPage />} />
         <Route exact path="/contactus" element={<ContactUsPage />} />
 
-        {/* <Route exact path="/signup" element={Sing}>
-        <h1>Sign Up Page</h1>
-      </Route> */}
+        <Route path="/event/:id" element={<UpdateWinnersPage />} />
+        <Route path="/view-result" element={<ViewResultPage />} />
+        <Route path="/notification" element={<ViewNotificationPage />} />
 
-        {/* Private Routes */}
-        {isLoggedIn && role === "teacher" && (
-          <>
-            <Route path="/dashboard" element={<TeacherDashboard />} />
-            <Route path="/event/:id" element={<UpdateWinnersPage />} />
-          </>
-        )}
-        {isLoggedIn && role === "student" && (
-          <>
-            <Route path="/view-result" element={<ViewResultPage />} />
-            <Route path="/notification" element={<ViewNotificationPage />} />
-          </>
-        )}
-        {isLoggedIn && role === "admin" && (
-          <>
-            <Route path="/create-user" element={<CreateUserPage />} />
-            <Route path="/create-event" element={<CreateEventPage />} />
-            <Route path="/feedbacks" element={<ViewNotificationPage />} />
-            <Route path="/students" element={<ViewStudentsPage />} />
-            <Route path="/teachers" element={<ViewTeachersPage />} />
-          </>
-        )}
-        {isLoggedIn && (
-          <>
-            <Route path="/view-event" element={<EventList />} />
-            <Route path="/view-result" element={<ViewResultPage />} />
-            <Route path="/create-team" element={<AddTeamPage />} />
-            <Route path="/teams" element={<ViewTeamsPage />} />
-            <Route path="/team/:id" element={<ViewTeamPage />} />
-          </>
-        )}
+        <Route path="/create-user" element={<CreateUserPage />} />
+        <Route path="/create-event" element={<CreateEventPage />} />
+        <Route path="/feedbacks" element={<ViewNotificationPage />} />
+        <Route path="/students" element={<ViewStudentsPage />} />
+        <Route path="/teachers" element={<ViewTeachersPage />} />
+
+        <Route path="/view-event" element={<EventList />} />
+        <Route path="/view-result" element={<ViewResultPage />} />
+        <Route path="/create-team" element={<AddTeamPage />} />
+        <Route path="/teams" element={<ViewTeamsPage />} />
+        <Route path="/team/:id" element={<ViewTeamPage />} />
 
         {/* 404 Page */}
         <Route path="*" element={<NotFound />} />

@@ -11,16 +11,15 @@ const registerEvent = asyncHandler(async (req, res) => {
     const eventId = req.params.eventId;
     const check = await Event.findById(eventId)
     let arr = []
-    check?.applicants?.filter((element) => {
+    check.applicants.filter((element) => {
       if(element.user == req.body.user){
         arr.push(req.body.user)
       }
     });
     if(arr.length>0) throw new Error('Alerady Registered')
 
-    // check.applicants.push({ user: req.body.user, approved: false });
-    // await check.save()
-    // Dummy response
+    check.applicants.push({ user: req.body.user, approved: false });
+    await check.save()
     res.send(`Registered for event : ${check.name}`);
   } catch (err) {
     throw new Error(err);

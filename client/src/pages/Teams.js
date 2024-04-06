@@ -58,14 +58,14 @@ const ViewTeamsPage = () => {
           </tr>
         </thead>
         <tbody>
-          {teams.map((team) => (
-            <tr key={team._id}>
-              <td>{team.name}</td>
-              <td>{team.captain.name}</td>
-              <td>{team.participants.length}</td>
-              <td>{team.event.name}</td>
+          {teams?.map((team) => (
+            <tr key={team?._id}>
+              <td>{team?.name}</td>
+              <td>{team?.captain?.name}</td>
+              <td>{team?.participants?.length}</td>
+              <td>{team?.event?.name}</td>
               <td>
-                <Link to={`/team/${team._id}`}>View</Link>
+                <Link to={`/team/${team?._id}`}>View</Link>
               </td>
             </tr>
           ))}

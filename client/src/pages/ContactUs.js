@@ -3,7 +3,7 @@ import React from "react";
 
 const ContactUsPage = () => {
   return (
-    <div className="container mt-5">
+    <div className="container mt-5" style={{ minHeight: "52vh" }}>
       <h1 className="text-center mb-4">Contact Us</h1>
       <div className="row">
         <div className="col-md-6">

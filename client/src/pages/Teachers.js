@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"; // Import axios for making HTTP requests
 import { backendLocation } from "../config";
+import { useAuth } from "../context/AuthContext";
 
 const ViewTeachersPage = () => {
   const [teachers, setTeachers] = useState([]);
   const [serverError, setServerError] = useState(false);
-
+  const { role } = useAuth();
   const token = localStorage.getItem("token");
-
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -25,11 +25,31 @@ const ViewTeachersPage = () => {
         } else {
           setTeachers(response?.data);
         }
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetch();
-  }, [token]);
+  });
 
+  const deleteHandler = async (id) => {
+    try {
+      const { data } = await axios.delete(
+        `${backendLocation}/admin/delete/user/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (data?.message) {
+        setServerError(data?.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="container mt-5 view-height">
       {serverError && (
@@ -55,14 +75,25 @@ const ViewTeachersPage = () => {
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>
+            {role === "admin" && <th>Action</th>}
           </tr>
         </thead>
         <tbody>
-          {teachers.map((teacher) => (
-            <tr key={teacher._id}>
-              <td>{teacher.name}</td>
-              <td>{teacher.email}</td>
-              <td>{teacher.phone}</td>
+          {teachers?.map((e) => (
+            <tr key={e._id}>
+              <td>{e.name}</td>
+              <td>{e.email}</td>
+              <td>{e.phone}</td>
+              {role === "admin" && (
+                <td>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => deleteHandler(e._id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

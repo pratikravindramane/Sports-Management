@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"; // Import axios for making HTTP requests
 import { backendLocation } from "../config";
+import { useAuth } from "../context/AuthContext";
 
 const ViewStudentsPage = () => {
   const [students, setStudents] = useState([]);
   const [serverError, setServerError] = useState(false);
+  const { role } = useAuth();
 
   const token = localStorage.getItem("token");
 
@@ -28,8 +30,25 @@ const ViewStudentsPage = () => {
       } catch (error) {}
     };
     fetch();
-  }, [token]);
-
+  });
+  const deleteHandler = async (id) => {
+    try {
+      const { data } = await axios.delete(
+        `${backendLocation}/admin/delete/user/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (data?.message) {
+        setServerError(data?.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="container mt-5 view-height">
       {serverError && (
@@ -55,6 +74,7 @@ const ViewStudentsPage = () => {
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>
+            {role === "admin" && <th>Phone</th>}
           </tr>
         </thead>
         <tbody>
@@ -63,6 +83,16 @@ const ViewStudentsPage = () => {
               <td>{e.name}</td>
               <td>{e.email}</td>
               <td>{e.phone}</td>
+              {role === "admin" && (
+                <td>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => deleteHandler(e._id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>
