@@ -37,6 +37,7 @@ const SignupPage = () => {
 
   const navigate = useNavigate();
   const [serverError, setServerError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
@@ -53,6 +54,7 @@ const SignupPage = () => {
     }
     // resetForm();
   };
+
   return (
     <div className="container mt-5">
       {serverError && (
@@ -126,12 +128,21 @@ const SignupPage = () => {
                   </div>
                   <div className="form-group">
                     <label htmlFor="password">Password</label>
-                    <Field
-                      type="password"
-                      id="password"
-                      name="password"
-                      className="form-control"
-                    />
+                    <div className="input-group">
+                      <Field
+                        type={showPassword ? "text" : "password"}
+                        id="password"
+                        name="password"
+                        className="form-control"
+                      />
+                      <button
+                        type="button"
+                        className="btn btn-outline-secondary"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? "Hide" : "Show"}
+                      </button>
+                    </div>
                     <ErrorMessage
                       name="password"
                       component="div"
@@ -140,12 +151,21 @@ const SignupPage = () => {
                   </div>
                   <div className="form-group">
                     <label htmlFor="confirmPassword">Confirm Password</label>
-                    <Field
-                      type="password"
-                      id="confirmPassword"
-                      name="confirmPassword"
-                      className="form-control"
-                    />
+                    <div className="input-group">
+                      <Field
+                        type={showPassword ? "text" : "password"}
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        className="form-control"
+                      />
+                      <button
+                        type="button"
+                        className="btn btn-outline-secondary"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? "Hide" : "Show"}
+                      </button>
+                    </div>
                     <ErrorMessage
                       name="confirmPassword"
                       component="div"

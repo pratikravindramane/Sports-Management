@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { backendLocation } from "../config";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 
 const UpdateWinnersPage = () => {
   const [event, setEvents] = useState({});
@@ -9,7 +9,7 @@ const UpdateWinnersPage = () => {
   const [serverError, setServerError] = useState(false);
   const [team, setTeam] = useState([]);
   const params = useParams();
-
+  const navigate= useNavigate()
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -63,6 +63,8 @@ const UpdateWinnersPage = () => {
 
       if (response.data?.message) {
         setServerError(response.data.message);
+      }else{
+        navigate("/view-result");
       }
     } catch (error) {
       console.error("Error updating winners:", error);
@@ -118,7 +120,54 @@ const UpdateWinnersPage = () => {
                 ))}
               </select>
             </div>
-            {/* Second and third prize selection goes here */}
+
+            <div className="mb-3">
+              <label
+                htmlFor={`secondWinner_${event._id}`}
+                className="form-label"
+              >
+                Second Prize:
+              </label>
+              <select
+                id={`secondWinner_${event._id}`}
+                className="form-select"
+                value={selectedWinners[event._id]?.second || ""}
+                onChange={(e) =>
+                  handleWinnerChange(event._id, "second", e.target.value)
+                }
+              >
+                <option value="">Select team</option>
+                {team.map((team) => (
+                  <option key={team._id} value={team._id}>
+                    {team.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="mb-3">
+              <label
+                htmlFor={`thirdWinner_${event._id}`}
+                className="form-label"
+              >
+                Third Prize:
+              </label>
+              <select
+                id={`thirdWinner_${event._id}`}
+                className="form-select"
+                value={selectedWinners[event._id]?.third || ""}
+                onChange={(e) =>
+                  handleWinnerChange(event._id, "third", e.target.value)
+                }
+              >
+                <option value="">Select team</option>
+                {team.map((team) => (
+                  <option key={team._id} value={team._id}>
+                    {team.name}
+                  </option>
+                ))}
+              </select>
+            </div>
 
             <button
               type="button"

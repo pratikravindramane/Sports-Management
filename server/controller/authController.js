@@ -127,10 +127,45 @@ const viewSports = asyncHandler(async (req, res) => {
   }
 });
 
+// View available sports
+const viewOneSports = asyncHandler(async (req, res) => {
+  try {
+    const events = await Event.findById(req.params.id)
+      .populate("applicants.user")
+      .populate("winners.first")
+      .populate("winners.second")
+      .populate("winners.third");
+    res.send(events);
+  } catch (err) {
+    throw new Error(err);
+  }
+});
+
+// Change Password
+const changePassword = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) throw new Error("No User Found With This Email");
+  const salt = await bcrypt.genSaltSync(10);
+  const hash = await bcrypt.hash(password, salt);
+    const token = genrateToken(user._id, user.isAdmin);
+    user.password = hash;
+    user.token = token;
+    await user.save();
+    res.send(user); // forbidden
+  } catch (error) {
+    console.log(error);
+    throw new Error(error);
+  }
+});
+
 module.exports = {
   login,
   adminLogin,
   logout,
   register,
   viewSports,
+  changePassword,
+  viewOneSports
 };

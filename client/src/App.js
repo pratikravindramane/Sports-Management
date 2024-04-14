@@ -21,6 +21,7 @@ import AddTeamPage from "./pages/AddTeam";
 import ViewTeamsPage from "./pages/Teams";
 import ViewTeamPage from "./pages/OneTeam";
 import UpdateWinnersPage from "./pages/OneEvent";
+import ForgetPassword from "./components/ForgetPasswrod";
 const App = () => {
   const { isLoggedIn, role } = useAuth();
   return (
@@ -30,6 +31,7 @@ const App = () => {
         {/* Public Routes */}
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/login" element={<LoginForm />} />
+        <Route exact path="/forget-password" element={<ForgetPassword />} />
         <Route exact path="/signup" element={<SignupPage />} />
         <Route exact path="/aboutus" element={<AboutUsPage />} />
         <Route exact path="/contactus" element={<ContactUsPage />} />

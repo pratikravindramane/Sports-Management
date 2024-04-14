@@ -35,7 +35,7 @@ const ContactUsPage = () => {
                 className="form-control"
               />
             </div>
-            <button type="submit" className="btn btn-primary mt-3">
+            <button type="submit" className="btn btn-primary my-3">
               Submit
             </button>
           </form>
@@ -50,10 +50,15 @@ const ContactUsPage = () => {
             <br />
             Address: 1234 Main Street, City, Country
           </p>
-          <p>
-            Nullam vestibulum, leo non interdum faucibus, libero enim varius
-            nisl, nec pharetra sem arcu non nisi. Nulla facilisi. Suspendisse
-            potenti. Vivamus varius velit nec nunc sodales.
+          <p className="mt-5">
+            We value your feedback and inquiries. Whether you have questions
+            about our services, suggestions for improvement, or simply want to
+            get in touch, we're here to help! Our dedicated team is committed to
+            providing prompt and helpful assistance to address any concerns you
+            may have. Feel free to reach out to us using the contact form below,
+            and we'll make sure to respond as soon as possible. Your
+            satisfaction is our priority, and we look forward to hearing from
+            you.
           </p>
         </div>
       </div>

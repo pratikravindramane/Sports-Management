@@ -13,9 +13,9 @@ const AddTeamPage = () => {
   const [users, setUsers] = useState([]);
   const [show, setShow] = useState(false);
   const [eventValue, setEventValue] = useState("");
-  const [applicants, setApplicants] = useState();
+  const [applicants, setApplicants] = useState([]);
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
     const fetchEvent = async () => {
       try {
         const response = await axios.get(`${backendLocation}/sports`);
@@ -24,9 +24,12 @@ const AddTeamPage = () => {
         } else {
           setEvents(response?.data);
         }
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
-    const fetch = async () => {
+
+    const fetchUsers = async () => {
       try {
         const response = await axios.get(
           `${backendLocation}/admin/view-students`,
@@ -42,11 +45,15 @@ const AddTeamPage = () => {
         } else {
           setUsers(response?.data);
         }
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
-    fetch();
+
     fetchEvent();
+    fetchUsers();
   }, []);
+
   const handleParticipantToggle = (event, setFieldValue) => {
     const selectedOptions = Array.from(event.target.options)
       .filter((option) => option.selected)
@@ -54,6 +61,7 @@ const AddTeamPage = () => {
 
     setFieldValue("participants", selectedOptions);
   };
+
   const handleSubmit = async (values, { resetForm }) => {
     try {
       const newCompany = await axios.post(
@@ -74,8 +82,8 @@ const AddTeamPage = () => {
     } catch (error) {
       console.log(error);
     }
-    // resetForm();
   };
+
   const changeHandler = async (e) => {
     if (e.target.value === "") {
       setShow(false);
@@ -105,12 +113,10 @@ const AddTeamPage = () => {
         }}
         validationSchema={Yup.object().shape({
           name: Yup.string().required("Name is required"),
-          // event: Yup.string().required("Event is required"),
           captain: Yup.string().required("Captain is required"),
-          participants: Yup.array().min(
-            1,
-            "At least one participant is required"
-          ),
+          participants: Yup.array()
+            .min(1, "At least one participant is required")
+            .required("At least one participant is required"),
         })}
         onSubmit={handleSubmit}
       >
@@ -141,8 +147,6 @@ const AddTeamPage = () => {
                 }`}
                 value={eventValue}
                 onChange={(e) => {
-                  // handleChange(e);
-
                   e.preventDefault();
                   changeHandler(e);
                 }}
