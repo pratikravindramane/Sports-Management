@@ -16,41 +16,46 @@ const AboutUsPage = () => {
         </div>
         <div className="col-md-6">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-            vestibulum, leo non interdum faucibus, libero enim varius nisl, nec
-            pharetra sem arcu non nisi. Nulla facilisi.
+            Our sports event management project offers a comprehensive solution
+            for organizing and overseeing sports events with ease.
+            Administrators hold the reins, empowered to add, delete, and manage
+            various elements such as events, teams, users, and teachers. This
+            level of control ensures that every aspect of sports coordination is
+            finely tuned to perfection, guaranteeing a seamless experience for
+            all involved.
           </p>
           <p>
-            Suspendisse potenti. Vivamus varius velit nec nunc sodales, sit amet
-            viverra enim dictum. In non aliquam leo. Ut convallis nisi velit, ut
-            venenatis mauris viverra in.
+            Teachers play a crucial role within our platform, equipped with the
+            ability to create teams, provide valuable feedback, and update event
+            results. Their expertise adds depth to the sports management
+            process, enhancing the overall quality of events and fostering a
+            supportive environment for participants to thrive.
           </p>
           <p>
-            Suspendisse potenti. Vivamus varius velit nec nunc sodales, sit amet
-            viverra enim dictum. In non aliquam leo. Ut convallis nisi velit, ut
-            venenatis mauris viverra in.
+            Students are at the forefront of our sports event management
+            project, with features tailored to their needs. Through simple login
+            and signup processes, they gain access to a world of sporting
+            opportunities, where they can register for events, discover their
+            team assignments, and stay updated on event results. This seamless
+            user experience encourages active participation and engagement in
+            sporting activities.
           </p>
           <br />
           <p>
-            Suspendisse potenti. Vivamus varius velit nec nunc sodales, sit amet
-            viverra enim dictum. In non aliquam leo. Ut convallis nisi velit, ut
-            venenatis mauris viverra in.
+            With our user-friendly interface, administrators can navigate the
+            intricacies of event management effortlessly. Whether it's adding
+            new events to the calendar, creating and organizing teams, or
+            managing user accounts, our platform streamlines the entire process,
+            saving time and ensuring that every detail is handled with
+            precision.
           </p>
           <p>
-            Suspendisse potenti. Vivamus varius velit nec nunc sodales, sit amet
-            viverra enim dictum. In non aliquam leo. Ut convallis nisi velit, ut
-            venenatis mauris viverra in.
-          </p>
-          <br />
-          <p>
-            Suspendisse potenti. Vivamus varius velit nec nunc sodales, sit amet
-            viverra enim dictum. In non aliquam leo. Ut convallis nisi velit, ut
-            venenatis mauris viverra in.
-          </p>
-          <p>
-            Suspendisse potenti. Vivamus varius velit nec nunc sodales, sit amet
-            viverra enim dictum. In non aliquam leo. Ut convallis nisi velit, ut
-            venenatis mauris viverra in.
+            Our commitment to excellence extends beyond just organizing events;
+            we provide a platform where sports enthusiasts can come together to
+            celebrate their passion. Through efficient management and robust
+            features, we aim to create an environment where the spirit of
+            sportsmanship thrives, fostering camaraderie, skill development, and
+            unforgettable experiences for all involved.
           </p>
         </div>
       </div>

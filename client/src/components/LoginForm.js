@@ -5,6 +5,7 @@ import { backendLocation } from "../config";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+// import loginImage from "../images/login-image.jpg"; // Import your image file
 
 const LoginForm = () => {
   const [serverError, setServerError] = useState(false);
@@ -64,6 +65,14 @@ const LoginForm = () => {
           <div className="card">
             <div className="card-body">
               <h2 className="card-title mb-4">Login</h2>
+              <img
+                src={
+                  "https://www.sportsadda.com/static-assets/images/login/login-thumb.png?v=3.58"
+                }
+                alt="Login"
+                className="img-fluid mb-4"
+              />{" "}
+              {/* Add your image here */}
               <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -110,10 +119,10 @@ const LoginForm = () => {
                     />
                   </div>
                   <div className="d-flex justify-content-between align-items-center">
-                  <button type="submit" className="btn btn-primary mt-3">
-                    Submit
-                  </button>
-                  <Link to={"/forget-password"}>Forget Password</Link>
+                    <button type="submit" className="btn btn-primary mt-3">
+                      Submit
+                    </button>
+                    <Link to={"/forget-password"}>Forget Password</Link>
                   </div>
                 </Form>
               </Formik>
